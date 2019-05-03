@@ -7,3 +7,11 @@ services:
         source: ./9cc
         target: /9cc
     working_dir: /9cc
+  rcc:
+    image: ruby:2.4.5
+    command: /bin/bash
+    volumes:
+      - type: bind
+        source: ./rcc
+        target: /rcc
+    working_dir: /rcc
