@@ -12,7 +12,24 @@ int main(int argc, char **argv)
   printf(".intel_syntax noprefix\n");
   printf(".global main\n");
   printf("main:\n");
-  printf("  mov rax, %d\n", atoi(argv[1]));
+
+  char *p = argv[1];
+  printf("  mov rax, %ld\n", strtol(p, &p, 10)); // `strtol` stands for "string to long"
+  while (*p)
+  {
+    switch (*p)
+    {
+    case '+':
+      printf("  add rax, %ld\n", strtol(&p[1], &p, 10));
+      break;
+    case '-':
+      printf("  sub rax, %ld\n", strtol(&p[1], &p, 10));
+      break;
+    default:
+      fprintf(stderr, "予期しない文字です: '%c'\n", *p);
+      return 1;
+    }
+  }
   printf("  ret\n");
 
   return 0;
